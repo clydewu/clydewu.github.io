@@ -32,806 +32,809 @@
     </header>
 
     <div class="container">
-        <div><strong><span style="font-size: 14pt;">Chapter 1 - Javascript物件</span></strong>
+        <div>
+            <div><strong><span style="font-size: 14pt;">Chapter 1 - Javascript物件</span></strong>
+                <br clear="none" />
+            </div>
+            <div>
+                <hr/>
+            </div>
+            <div>* Function接()，會產生一個執行物件(function return後如無參考，則會被GC)，並會傳回這個function的return value
+                <br clear="none" />
+            </div>
+            <div>* Function冠用new(此時稱此function為建構函式)，會產生一個執行物件，並傳回這個物件
+                <br clear="none" />
+            </div>
+            <div>* function(){return {ID: 1}}() 跟 new function(){this.ID = 1} 都會傳回一個物件，差別是前者不會有prototype繼承</div>
+            <div>  - <span style="color: rgb(153, 153, 153);">是嘛？在Chrome裡都有耶?</span> 
+                <br clear="none" />* 尚未明白為何的地方：
+                <br clear="none" />
+            </div>
+            <div>  - Function裏面有return，執行物件可以接()執行！！</div>  - Function沒有return，就只是執行物件
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 九大原生物件
+            <br clear="none" />
+        </div>
+        <div>  - Number, String, Boolean, Array, Object, Function, RegExp, Date, Error
+            <br clear="none" />
+        </div>
+        <div>* 原生物件標準需由new運算子產生，但可用字面值(Literal)來產生
+            <br clear="none" />
+        </div>
+        <div>  - var n = 1
+            <br clear="none" />
+        </div>
+        <div>  - var s = "string"
+            <br clear="none" />
+        </div>
+        <div>  - var b = true
+            <br clear="none" />
+        </div>
+        <div>  - var a = [1,2,3]
+            <br clear="none" />
+        </div>
+        <div>  - var o = {ID: 1}
+            <br clear="none" />
+        </div>
+        <div>  - var f = function(){}
+            <br clear="none" />
+        </div>
+        <div>  - var r = /.*/
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 值分為原始值(Simple Value)與複合值(Complex Value)</div>
+        <div>  - 原始值
+            <br clear="none" />
+        </div>
+        <div>    - 複製：完全複製
+            <br clear="none" />
+        </div>
+        <div>    - 比較：比較其值
+            <br clear="none" />
+        </div>
+        <div>    - 屬性：沒這檔事
+            <br clear="none" />
+        </div>
+        <div>  - 複合值(就像指標啦)
+            <br clear="none" />
+        </div>
+        <div>    - 複製：僅複製參考
+            <br clear="none" />
+        </div>
+        <div>    - 比較：比較參考
+            <br clear="none" />
+        </div>
+        <div>    - 屬性：可以加入屬性
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 原始值包括6類:</div>
+        <div>  - null</div>
+        <div>  - undefined</div>
+        <div>  - "string"(雙引號字串)</div>
+        <div>  - 123(單純的數字)</div>
+        <div>  - true</div>
+        <div>  - false
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 當使用Literal產生Number, String, Boolean時，得到的是原始值(Simple value)</div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* Number, String, Boolean
+            <br clear="none" />
+        </div>
+        <div>  - 需特別注意當產生方式不同時(原始值/複合值)，行為有所不同
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 物件的Constructor是"指向"他的建構函數
+            <br clear="none" />
+        </div>
+        <div>  - 所以判斷物件類型的方法之一是比對Constructor是否為某個函數
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 2 - 應用物件與屬性<br clear="none"/></span></strong>
+            <hr/>
+        </div>
+        <div>* Complex Value的屬性可以是大部分的js value
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 可以亂裝(就JSON)
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 屬性可以透過obj.prop或obj['prop']存取
+            <br clear="none" />
+        </div>
+        <div> - 括號法功能較強：
+            <br clear="none" />
+        </div>
+        <div>    - 屬性名稱可以由字串組合
+            <br clear="none" />
+        </div>
+        <div>    - 屬性名稱可為數字或保留字, ex:  obj['123'], obj['object']
+            <br clear="none" />
+        </div>
+        <div>* 從物件中移除屬性用delete
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />* 尋找屬性：原型鍊(Prototype Chain) (就是繼承鍊！)
+            <br clear="none" />
+        </div>
+        <div>  0. 目前物件為obj
+            <br clear="none" />
+        </div>
+        <div>  1. 先找obj下面
+            <br clear="none" />
+        </div>
+        <div>  2. 再找obj.constructor.prototype
+            <br clear="none" />
+        </div>
+        <div>  3. 再找obj.constructor.constructor.prototype
+            <br clear="none" />
+        </div>
+        <div>  4. 都沒有，回傳undefined
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* hasOwnProperty() v.s. in 運算元  (注意屬性在此是以名稱(字串啦)來詢問)
+            <br clear="none" />
+        </div>
+        <div>  - hasOwnProperty()
+            <br clear="none" />
+        </div>
+        <div>    - 若為true，表示屬性不是從原型鍊來的。
+            <br clear="none" />
+        </div>
+        <div>  - in
+            <br clear="none" />
+        </div>
+        <div>    - 若為true，表示該物件的原型鍊找的到該屬性。
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 尋訪屬性，可使用 for-in loop
+            <br clear="none" />
+        </div>
+        <div>  - 會列出包含原型鍊內的所有屬性。可用 hasOwnProperty()檢查
+            <br clear="none" />
+        </div>
+        <div>  - 只會列出可列舉的(enumerable)的屬性，可用propertyIsEnumerable()檢查
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* Host物件
+            <br clear="
+    none" />
+        </div>
+        <div>  - 非javascript標準內的物件，ex. 瀏覽器提供的，
+            <br clear="none" />
+        </div>
+        <div>  - 其中必有一個Head物件，也就是環境物件， ex. window
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 3 - Object()</strong></span>
             <br clear="none" />
         </div>
         <div>
             <hr/>
         </div>
-        <div>* Function接()，會產生一個執行物件(function return後如無參考，則會被GC)，並會傳回這個function的return value
+        <div>* new Object()可填initial value，物件會成為該value所屬原生物件的物件
             <br clear="none" />
         </div>
-        <div>* Function冠用new(此時稱此function為建構函式)，會產生一個執行物件，並傳回這個物件
+        <div>
             <br clear="none" />
         </div>
-        <div>* function(){return {ID: 1}}() 跟 new function(){this.ID = 1} 都會傳回一個物件，差別是前者不會有prototype繼承</div>
-        <div>  - <span style="color: rgb(153, 153, 153);">是嘛？在Chrome裡都有耶?</span> 
-            <br clear="none" />* 尚未明白為何的地方：
+        <div>* 繼承鍊的源頭Object.prototype (注意Object不是實體)
             <br clear="none" />
         </div>
-        <div>  - Function裏面有return，執行物件可以接()執行！！</div>  - Function沒有return，就只是執行物件</div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 九大原生物件
-        <br clear="none" />
-    </div>
-    <div>  - Number, String, Boolean, Array, Object, Function, RegExp, Date, Error
-        <br clear="none" />
-    </div>
-    <div>* 原生物件標準需由new運算子產生，但可用字面值(Literal)來產生
-        <br clear="none" />
-    </div>
-    <div>  - var n = 1
-        <br clear="none" />
-    </div>
-    <div>  - var s = "string"
-        <br clear="none" />
-    </div>
-    <div>  - var b = true
-        <br clear="none" />
-    </div>
-    <div>  - var a = [1,2,3]
-        <br clear="none" />
-    </div>
-    <div>  - var o = {ID: 1}
-        <br clear="none" />
-    </div>
-    <div>  - var f = function(){}
-        <br clear="none" />
-    </div>
-    <div>  - var r = /.*/
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 值分為原始值(Simple Value)與複合值(Complex Value)</div>
-    <div>  - 原始值
-        <br clear="none" />
-    </div>
-    <div>    - 複製：完全複製
-        <br clear="none" />
-    </div>
-    <div>    - 比較：比較其值
-        <br clear="none" />
-    </div>
-    <div>    - 屬性：沒這檔事
-        <br clear="none" />
-    </div>
-    <div>  - 複合值(就像指標啦)
-        <br clear="none" />
-    </div>
-    <div>    - 複製：僅複製參考
-        <br clear="none" />
-    </div>
-    <div>    - 比較：比較參考
-        <br clear="none" />
-    </div>
-    <div>    - 屬性：可以加入屬性
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 原始值包括6類:</div>
-    <div>  - null</div>
-    <div>  - undefined</div>
-    <div>  - "string"(雙引號字串)</div>
-    <div>  - 123(單純的數字)</div>
-    <div>  - true</div>
-    <div>  - false
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 當使用Literal產生Number, String, Boolean時，得到的是原始值(Simple value)</div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* Number, String, Boolean
-        <br clear="none" />
-    </div>
-    <div>  - 需特別注意當產生方式不同時(原始值/複合值)，行為有所不同
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 物件的Constructor是"指向"他的建構函數
-        <br clear="none" />
-    </div>
-    <div>  - 所以判斷物件類型的方法之一是比對Constructor是否為某個函數
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 2 - 應用物件與屬性<br clear="none"/></span></strong>
-        <hr/>
-    </div>
-    <div>* Complex Value的屬性可以是大部分的js value
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 可以亂裝(就JSON)
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 屬性可以透過obj.prop或obj['prop']存取
-        <br clear="none" />
-    </div>
-    <div> - 括號法功能較強：
-        <br clear="none" />
-    </div>
-    <div>    - 屬性名稱可以由字串組合
-        <br clear="none" />
-    </div>
-    <div>    - 屬性名稱可為數字或保留字, ex:  obj['123'], obj['object']
-        <br clear="none" />
-    </div>
-    <div>* 從物件中移除屬性用delete
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />* 尋找屬性：原型鍊(Prototype Chain) (就是繼承鍊！)
-        <br clear="none" />
-    </div>
-    <div>  0. 目前物件為obj
-        <br clear="none" />
-    </div>
-    <div>  1. 先找obj下面
-        <br clear="none" />
-    </div>
-    <div>  2. 再找obj.constructor.prototype
-        <br clear="none" />
-    </div>
-    <div>  3. 再找obj.constructor.constructor.prototype
-        <br clear="none" />
-    </div>
-    <div>  4. 都沒有，回傳undefined
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* hasOwnProperty() v.s. in 運算元  (注意屬性在此是以名稱(字串啦)來詢問)
-        <br clear="none" />
-    </div>
-    <div>  - hasOwnProperty()
-        <br clear="none" />
-    </div>
-    <div>    - 若為true，表示屬性不是從原型鍊來的。
-        <br clear="none" />
-    </div>
-    <div>  - in
-        <br clear="none" />
-    </div>
-    <div>    - 若為true，表示該物件的原型鍊找的到該屬性。
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 尋訪屬性，可使用 for-in loop
-        <br clear="none" />
-    </div>
-    <div>  - 會列出包含原型鍊內的所有屬性。可用 hasOwnProperty()檢查
-        <br clear="none" />
-    </div>
-    <div>  - 只會列出可列舉的(enumerable)的屬性，可用propertyIsEnumerable()檢查
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* Host物件
-        <br clear="
-none" />
-    </div>
-    <div>  - 非javascript標準內的物件，ex. 瀏覽器提供的，
-        <br clear="none" />
-    </div>
-    <div>  - 其中必有一個Head物件，也就是環境物件， ex. window
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 3 - Object()</strong></span>
-        <br clear="none" />
-    </div>
-    <div>
-        <hr/>
-    </div>
-    <div>* new Object()可填initial value，物件會成為該value所屬原生物件的物件
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 繼承鍊的源頭Object.prototype (注意Object不是實體)
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 4 - Function()</span></strong>
-        <br clear="none" />
-    </div>
-    <div>
-        <hr/>* 函數：一個陳述式的執行範圍
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 在函數名稱後加上()代表執行此函數
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* new Function(arg1,...., argn)，可吃n個參數，前面是建構出的Function的參數，最後一個是函數內容的字串
-        <br clear="none" />
-    </div>
-    <div>  - var func = new Function('a', 'b', 'return a+b')
-        <br clear="none" />
-    </div>
-    <div>  - var func = function(a, b) {return a+b}
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 上面那種作法會用到eval()造成運算浪費
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 沒有指定return的函式會回傳undefined
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* arguments
-        <br clear="none" />
-    </div>
-    <div>  - 所以函數可以不給定指定的參數
-        <br clear="none" />
-    </div>
-    <div>  - 也可以給沒指定的參數
-        <br clear="none" />
-    </div>
-    <div>  - arguments.callee指向函數本身
-        <br clear="none" />
-    </div>
-    <div>  - arguments.length是函數被<span style="color: rgb(255, 0, 0);">呼叫</span>時得到的參數量 (1.4之後Deprecated，只能arguments.callee.length取得函數指定的參數數量)
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* this
-        <br clear="none" />
-    </div>
-    <div>  - 這個函數屬於那個物件
-        <br clear="none" />
-    </div>
-    <div>  - 若是Global，則指向環境物件
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* length
-        <br clear="none" />
-    </div>
-    <div>  - var func = function(a, b , c){} 則 func.length === 3
-        <br clear="none" />
-    </div>
-    <div> 
-        <br clear="none" />
-    </div>
-    <div>* 函數建立4種方式
-        <br clear="none" />
-    </div>
-    <div>  - var funcConstructor = new Function('a', 'b', 'return a+b');
-        <br clear="none" />
-    </div>
-    <div>  - function funcStatement(a, b) { return a+b; }
-        <br clear="none" />
-    </div>
-    <div>  - var funcExpression = function(a, b) { return a + b; }
-        <br clear="none" />
-    </div>
-    <div>  - var funcNamedFunction = function funcNamedFunction(a, b) { return a + b; }
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 函式使用4種方式
-        <br clear="none" />
-    </div>
-    <div>  - 當函式執行，就是加上()來執行
-        <br clear="none" />
-    </div>
-    <div>  - 當方法執行，一樣是()
-        <br clear="none" />
-    </div>
-    <div>  - 當建構式使用，配合new
-        <br clear="none" />
-    </div>
-    <div>  - apply()或call()，用途是改變所屬物件(也就是this)
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* function aaa(){} 沒有aaa就叫匿名函式
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 可以無限巢狀
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 函式可以當作參數傳入函式，也可以當作return value被回傳
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* Javascript執行前會解譯程式，所以可以在函式宣告之前使用函式
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 函式可以遞迴呼叫
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 5 - Head/Global 物件</span></strong>
-        <br clear="none" />
-    </div>
-    <div>
-        <hr/>* Head物件包含所有的物件，透過範圍鍊所有地方都可以呼叫Head物件的成員，故就像全域屬性一樣
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 參考Head物件
-        <br clear="none" />
-    </div>
-    <div>  - 直接參考其名稱(ex. 瀏覽器是window)
-        <br clear="none" />
-    </div>
-    <div>  - 在全域範圍內使用this
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 在全域範圍中進行宣告，用var不用var有些微差異
-        <br clear="none" />
-    </div>
-    <div>  - 用var 是屬性
-        <br clear="none" />
-    </div>
-    <div>  - 不用  是變數
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />* 因為Head是範圍鏈的最後一站，所以他可以是隱式的。通常使用Head物件的成員不會明確參考Head物件
-        <br clear="none" />
-    </div>
-    <div>  - window.alert()
-        <br clear="none" />
-    </div>
-    <div>  - alert()  &lt;-- usually
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" /><span style="font-size: 14pt;"><strong>Chapter 6 - this關鍵字</strong></span>
-        <br clear="none" />
-        <hr/>* this參考到函式所在的物件
-        <br clear="none" />
-    </div>
-    <div>  - 例外：使用new、apply()、call()
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 巢狀函式內，this
-        <br clear="none" />
-    </div>
-    <div>  - ES3：this會迷失，而指到Head
-        <br clear="none" />
-    </div>
-    <div>  - ES5：會正常指到應該的物件
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 常用that來避免this迷失
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* apply()跟call()可以指定this的值
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 當使用new呼叫函式時，this會參考到等等要被new出來的物件
-        <br clear="none" />
-    </div>
-    <div>  - 如果不用new呼叫，那就會在函式所屬物件產生新的屬性。(通常就是window了XD)
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>* 在prototype中的函式參考到this，this會指向實際的instance，而不是prototype
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div>
-        <br clear="none" />
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 7 - 範圍與Closure</strong></span>
-    </div>
-    <div>
-        <hr/><span style="font-size: 14pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* Javascript的Scope有：<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - 全域範圍<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - 函式範圍<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - eval()範圍</span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* Javascript沒有區塊範圍( {} )<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 以var宣告的變數會是在當前範圍內宣告，沒有用var宣告的會被宣告在全域範圍<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 若同樣的變數名稱在不同的範圍內，會傳回最近的那個值<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 範圍鍊是在"定義"函式時決定的，而非在呼叫過程中決定<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - 這就叫作語彙範圍(Lexical Scoping)<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 14pt;"><strong>Chapter 8 - 函式原型屬性</strong></span>
-        <br clear="none" />
-        </span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-        <hr/><span style="font-size: 10pt;">* 預設的prototype是一個Object()物件<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* Firefox2+/Safari/Chrome可以這樣參考prototype<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - obj.__proto__<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* EMCA標準參考方式<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - obj.constructor.prototype<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* Prototype鍊會傳回第一個找到的屬性，所以會有屏蔽效應<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 若是修改A物件預設的prototype，那用A物件new出來的物件其constructor不會是A()，而是Object()<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - 要避免必須在a的prototype內加入constructor為a<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* prototype鍊是動態參考的，所以當你修改了prototype的內容，所有的Instances都會參考到最新的內容<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 但若直經更換整個prototype，現有的Instances還是會參考到舊的prototype<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 一旦建立Instances了，就不該更換prototype，避免物件有不一致的行為<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* prototype繼承鍊的原始用意是要摹仿傳統物件導向的繼承機制<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 9 - Array()</strong></span><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span><span style="font-size: 10pt;"> <br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span></span>
-        <hr/><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* Array(1,2,3)會建立一個長度為3且初始值分別為1,2,3的陣列<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  但Array(5)則會建立一個長度為5的空陣列<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 透過更改length屬性，會讓Array實質的長大或變小<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 陣列裏面可以存放陣列，而有多維陣列的行為<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 向後尋訪陣列<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  var count = 0<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  while (count &lt; arr.length){<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">    count++;<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  }<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 向前尋訪陣列<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  var count = arr.length<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  while(count--) {</span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  }<br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 10 - String()<br clear="none"/></strong></span>
-    </div>
-    <div>
-        <hr/><span style="font-size: 14pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* a = "abc"; typeof a是String<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  a = new String("abc"); typeof a是Object  (!!!!)<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><strong><strong><span style="font-size: 14pt;">Chapter 11 - Number()</span></strong></strong>
-        <hr/><strong><span style="font-size: 14pt;"/></strong>
-    </div>
-    <div><span style="font-size: 10pt;">* 第1點跟String一樣，請使用Literal產生Number避免typeof變成Object<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 可以使用hex或oct表達法<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - var a = 0xff   //a = 255<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - var b = 012  //a = 10<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 12 - Boolean()<br clear="none"/></strong></span>
-    </div>
-    <div>
-        <hr/><span style="font-size: 14pt;" />
-    </div>
-    <div><span style="
-font-size: 10pt;">* 第1點，一樣， String()/Number()/Boolean()都有這個問題<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* var a = new Boolean(false); console.log( a ? "true" : "false"); 會log true。WTF<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 0, -0, null, false, NaN, undefined, ""會被轉換成false，其他都是true</span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 14pt;"><strong>Chapter 13 - 使用原始字串、數字、布林值<br clear="none"/></strong></span>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-        <hr/><span style="font-size: 10pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* 原始值在存取時，會變轉換成物件，提供該物件的屬性。完成屬性的存取後，該物件就會被捨棄，又變回原始值<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 如果要<span style="text-decoration: underline;">直接</span>存取數字原始值的屬性，必須在被轉換成物件之間對數字賦值(evaluate)，例如 1..toString()  (&lt;- 注意第一個.表示10進位)
-        <br clear="none" />
-        </span>
-    </div>
-    <div><span style="font-size: 10pt;">  (這超不懂的，WTF)<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 避免使用new建構式產生原始值，避免typeof變成Object()<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 14 - null<br clear="none"/></span></strong>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-        <hr/><span style="font-size: 10pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* null用來表示某個屬性存在，但沒有值<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 檢驗null，請用 ===<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - typeof 會是 Object()<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">  - ==無法區分null與undefined<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 15 - undefined<br clear="none"/></span></strong>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-        <hr/><span style="font-size: 10pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* 用途一：表示一個變數尚未被賦值<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 用途二：表示一個屬性不存在(包括在繼承鍊裡也找不到)<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* 不該自行把某變數賦值為undefined，因為此時你宣告了變數了，他不是不存在，只是空值，應該要給null<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><strong><span style="font-size: 14pt;">Chapter 16 - Math<br clear="none"/></span></strong>
-    </div>
-    <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
-        <hr/><span style="font-size: 10pt;" />
-    </div>
-    <div><span style="font-size: 10pt;">* Math是特別的內建物件，無法用他產生instance，因為他沒有建構式<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;">* Math內大寫開頭的常數屬性，無法改變他們的值<br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"><br clear="none"/></span>
-    </div>
-    <div><span style="font-size: 10pt;"> <br clear="none"/></span>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 4 - Function()</span></strong>
+            <br clear="none" />
+        </div>
+        <div>
+            <hr/>* 函數：一個陳述式的執行範圍
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 在函數名稱後加上()代表執行此函數
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* new Function(arg1,...., argn)，可吃n個參數，前面是建構出的Function的參數，最後一個是函數內容的字串
+            <br clear="none" />
+        </div>
+        <div>  - var func = new Function('a', 'b', 'return a+b')
+            <br clear="none" />
+        </div>
+        <div>  - var func = function(a, b) {return a+b}
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 上面那種作法會用到eval()造成運算浪費
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 沒有指定return的函式會回傳undefined
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* arguments
+            <br clear="none" />
+        </div>
+        <div>  - 所以函數可以不給定指定的參數
+            <br clear="none" />
+        </div>
+        <div>  - 也可以給沒指定的參數
+            <br clear="none" />
+        </div>
+        <div>  - arguments.callee指向函數本身
+            <br clear="none" />
+        </div>
+        <div>  - arguments.length是函數被<span style="color: rgb(255, 0, 0);">呼叫</span>時得到的參數量 (1.4之後Deprecated，只能arguments.callee.length取得函數指定的參數數量)
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* this
+            <br clear="none" />
+        </div>
+        <div>  - 這個函數屬於那個物件
+            <br clear="none" />
+        </div>
+        <div>  - 若是Global，則指向環境物件
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* length
+            <br clear="none" />
+        </div>
+        <div>  - var func = function(a, b , c){} 則 func.length === 3
+            <br clear="none" />
+        </div>
+        <div> 
+            <br clear="none" />
+        </div>
+        <div>* 函數建立4種方式
+            <br clear="none" />
+        </div>
+        <div>  - var funcConstructor = new Function('a', 'b', 'return a+b');
+            <br clear="none" />
+        </div>
+        <div>  - function funcStatement(a, b) { return a+b; }
+            <br clear="none" />
+        </div>
+        <div>  - var funcExpression = function(a, b) { return a + b; }
+            <br clear="none" />
+        </div>
+        <div>  - var funcNamedFunction = function funcNamedFunction(a, b) { return a + b; }
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 函式使用4種方式
+            <br clear="none" />
+        </div>
+        <div>  - 當函式執行，就是加上()來執行
+            <br clear="none" />
+        </div>
+        <div>  - 當方法執行，一樣是()
+            <br clear="none" />
+        </div>
+        <div>  - 當建構式使用，配合new
+            <br clear="none" />
+        </div>
+        <div>  - apply()或call()，用途是改變所屬物件(也就是this)
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* function aaa(){} 沒有aaa就叫匿名函式
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 可以無限巢狀
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 函式可以當作參數傳入函式，也可以當作return value被回傳
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* Javascript執行前會解譯程式，所以可以在函式宣告之前使用函式
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 函式可以遞迴呼叫
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 5 - Head/Global 物件</span></strong>
+            <br clear="none" />
+        </div>
+        <div>
+            <hr/>* Head物件包含所有的物件，透過範圍鍊所有地方都可以呼叫Head物件的成員，故就像全域屬性一樣
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 參考Head物件
+            <br clear="none" />
+        </div>
+        <div>  - 直接參考其名稱(ex. 瀏覽器是window)
+            <br clear="none" />
+        </div>
+        <div>  - 在全域範圍內使用this
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 在全域範圍中進行宣告，用var不用var有些微差異
+            <br clear="none" />
+        </div>
+        <div>  - 用var 是屬性
+            <br clear="none" />
+        </div>
+        <div>  - 不用  是變數
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />* 因為Head是範圍鏈的最後一站，所以他可以是隱式的。通常使用Head物件的成員不會明確參考Head物件
+            <br clear="none" />
+        </div>
+        <div>  - window.alert()
+            <br clear="none" />
+        </div>
+        <div>  - alert()  &lt;-- usually
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" /><span style="font-size: 14pt;"><strong>Chapter 6 - this關鍵字</strong></span>
+            <br clear="none" />
+            <hr/>* this參考到函式所在的物件
+            <br clear="none" />
+        </div>
+        <div>  - 例外：使用new、apply()、call()
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 巢狀函式內，this
+            <br clear="none" />
+        </div>
+        <div>  - ES3：this會迷失，而指到Head
+            <br clear="none" />
+        </div>
+        <div>  - ES5：會正常指到應該的物件
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 常用that來避免this迷失
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* apply()跟call()可以指定this的值
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 當使用new呼叫函式時，this會參考到等等要被new出來的物件
+            <br clear="none" />
+        </div>
+        <div>  - 如果不用new呼叫，那就會在函式所屬物件產生新的屬性。(通常就是window了XD)
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>* 在prototype中的函式參考到this，this會指向實際的instance，而不是prototype
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div>
+            <br clear="none" />
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 7 - 範圍與Closure</strong></span>
+        </div>
+        <div>
+            <hr/><span style="font-size: 14pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* Javascript的Scope有：<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - 全域範圍<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - 函式範圍<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - eval()範圍</span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* Javascript沒有區塊範圍( {} )<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 以var宣告的變數會是在當前範圍內宣告，沒有用var宣告的會被宣告在全域範圍<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 若同樣的變數名稱在不同的範圍內，會傳回最近的那個值<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 範圍鍊是在"定義"函式時決定的，而非在呼叫過程中決定<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - 這就叫作語彙範圍(Lexical Scoping)<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 14pt;"><strong>Chapter 8 - 函式原型屬性</strong></span>
+            <br clear="none" />
+            </span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+            <hr/><span style="font-size: 10pt;">* 預設的prototype是一個Object()物件<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* Firefox2+/Safari/Chrome可以這樣參考prototype<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - obj.__proto__<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* EMCA標準參考方式<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - obj.constructor.prototype<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* Prototype鍊會傳回第一個找到的屬性，所以會有屏蔽效應<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 若是修改A物件預設的prototype，那用A物件new出來的物件其constructor不會是A()，而是Object()<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - 要避免必須在a的prototype內加入constructor為a<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* prototype鍊是動態參考的，所以當你修改了prototype的內容，所有的Instances都會參考到最新的內容<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 但若直經更換整個prototype，現有的Instances還是會參考到舊的prototype<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 一旦建立Instances了，就不該更換prototype，避免物件有不一致的行為<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* prototype繼承鍊的原始用意是要摹仿傳統物件導向的繼承機制<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 9 - Array()</strong></span><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span><span style="font-size: 10pt;"> <br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span></span>
+            <hr/><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* Array(1,2,3)會建立一個長度為3且初始值分別為1,2,3的陣列<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  但Array(5)則會建立一個長度為5的空陣列<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 透過更改length屬性，會讓Array實質的長大或變小<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 陣列裏面可以存放陣列，而有多維陣列的行為<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 向後尋訪陣列<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  var count = 0<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  while (count &lt; arr.length){<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">    count++;<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  }<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">* 向前尋訪陣列<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  var count = arr.length<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  while(count--) {</span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;">  }<br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"><br clear="none"/></span></span>
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 10 - String()<br clear="none"/></strong></span>
+        </div>
+        <div>
+            <hr/><span style="font-size: 14pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* a = "abc"; typeof a是String<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  a = new String("abc"); typeof a是Object  (!!!!)<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><strong><strong><span style="font-size: 14pt;">Chapter 11 - Number()</span></strong></strong>
+            <hr/><strong><span style="font-size: 14pt;"/></strong>
+        </div>
+        <div><span style="font-size: 10pt;">* 第1點跟String一樣，請使用Literal產生Number避免typeof變成Object<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 可以使用hex或oct表達法<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - var a = 0xff   //a = 255<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - var b = 012  //a = 10<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 12 - Boolean()<br clear="none"/></strong></span>
+        </div>
+        <div>
+            <hr/><span style="font-size: 14pt;" />
+        </div>
+        <div><span style="
+    font-size: 10pt;">* 第1點，一樣， String()/Number()/Boolean()都有這個問題<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* var a = new Boolean(false); console.log( a ? "true" : "false"); 會log true。WTF<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 0, -0, null, false, NaN, undefined, ""會被轉換成false，其他都是true</span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 14pt;"><strong>Chapter 13 - 使用原始字串、數字、布林值<br clear="none"/></strong></span>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+            <hr/><span style="font-size: 10pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* 原始值在存取時，會變轉換成物件，提供該物件的屬性。完成屬性的存取後，該物件就會被捨棄，又變回原始值<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 如果要<span style="text-decoration: underline;">直接</span>存取數字原始值的屬性，必須在被轉換成物件之間對數字賦值(evaluate)，例如 1..toString()  (&lt;- 注意第一個.表示10進位)
+            <br clear="none" />
+            </span>
+        </div>
+        <div><span style="font-size: 10pt;">  (這超不懂的，WTF)<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 避免使用new建構式產生原始值，避免typeof變成Object()<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 14 - null<br clear="none"/></span></strong>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+            <hr/><span style="font-size: 10pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* null用來表示某個屬性存在，但沒有值<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 檢驗null，請用 ===<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - typeof 會是 Object()<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">  - ==無法區分null與undefined<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 15 - undefined<br clear="none"/></span></strong>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+            <hr/><span style="font-size: 10pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* 用途一：表示一個變數尚未被賦值<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 用途二：表示一個屬性不存在(包括在繼承鍊裡也找不到)<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* 不該自行把某變數賦值為undefined，因為此時你宣告了變數了，他不是不存在，只是空值，應該要給null<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><strong><span style="font-size: 14pt;">Chapter 16 - Math<br clear="none"/></span></strong>
+        </div>
+        <div><span style="font-size: 10pt;"><span style="font-size: 10pt;"/></span>
+            <hr/><span style="font-size: 10pt;" />
+        </div>
+        <div><span style="font-size: 10pt;">* Math是特別的內建物件，無法用他產生instance，因為他沒有建構式<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;">* Math內大寫開頭的常數屬性，無法改變他們的值<br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"><br clear="none"/></span>
+        </div>
+        <div><span style="font-size: 10pt;"> <br clear="none"/></span>
+        </div>
     </div>
 </body>
 
